@@ -29,7 +29,7 @@ class PortfolioCard extends StatelessWidget {
                 ),
               ),
               Icon(
-                Icons.visibility_outlined,
+                Icons.account_balance_wallet,
                 color: Colors.white.withOpacity(0.8),
                 size: 22,
               ),

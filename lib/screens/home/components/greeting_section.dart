@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../settings/settings_screen.dart';
 import 'portfolio_value_card.dart';
 
 class GreetingSection extends StatelessWidget {
@@ -15,7 +16,7 @@ class GreetingSection extends StatelessWidget {
           bottomRight: Radius.circular(40),
         ),
       ),
-      child: const Column(
+      child:  Column(
         children: [
           Row(
             children: [
@@ -40,7 +41,20 @@ class GreetingSection extends StatelessWidget {
               Spacer(),
               Icon(Icons.notifications_none, color: Colors.white),
               SizedBox(width: 15),
-              Icon(Icons.menu, color: Colors.white),
+              GestureDetector(
+                onTap: () {
+                  print("Settings icon tapped!");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SettingsScreen()),
+                  );
+                },
+                child: Icon(
+                  Icons.settings,
+                  color: Colors.white,
+                ),
+              )
+
             ],
           ),
           SizedBox(height: 30),
