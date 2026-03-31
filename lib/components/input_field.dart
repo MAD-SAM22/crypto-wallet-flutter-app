@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
 class InputField extends StatefulWidget {
-  // final String label;
   final String hint;
   final IconData icon;
   final bool isPassword;
 
   const InputField({
     Key? key,
-    // required this.label,
     required this.hint,
     required this.icon,
     this.isPassword = false,
@@ -27,20 +25,24 @@ class _InputFieldState extends State<InputField> {
       obscureText: widget.isPassword ? _obscureText : false,
       decoration: InputDecoration(
         prefixIcon: Icon(widget.icon),
-        // labelText: widget.label,
         hintText: widget.hint,
-        border: OutlineInputBorder(),
+        filled: true,
+        fillColor: const Color(0xfff3f4f6),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide.none,
+        ),
         suffixIcon: widget.isPassword
             ? IconButton(
-          icon: Icon(
-            _obscureText ? Icons.visibility_off : Icons.visibility,
-          ),
-          onPressed: () {
-            setState(() {
-              _obscureText = !_obscureText;
-            });
-          },
-        )
+                icon: Icon(
+                  _obscureText ? Icons.visibility_off : Icons.visibility,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _obscureText = !_obscureText;
+                  });
+                },
+              )
             : null,
       ),
     );
