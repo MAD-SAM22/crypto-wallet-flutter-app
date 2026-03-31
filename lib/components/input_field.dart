@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/app_colors.dart';
 
 class InputField extends StatefulWidget {
   final String hint;
@@ -24,10 +25,11 @@ class _InputFieldState extends State<InputField> {
     return TextField(
       obscureText: widget.isPassword ? _obscureText : false,
       decoration: InputDecoration(
-        prefixIcon: Icon(widget.icon),
+        prefixIcon: Icon(widget.icon, color: AppColors.textSecondary),
         hintText: widget.hint,
+        hintStyle: const TextStyle(color: AppColors.textSecondary),
         filled: true,
-        fillColor: const Color(0xfff3f4f6),
+        fillColor: AppColors.backgroundLight,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide.none,
@@ -36,6 +38,7 @@ class _InputFieldState extends State<InputField> {
             ? IconButton(
                 icon: Icon(
                   _obscureText ? Icons.visibility_off : Icons.visibility,
+                  color: AppColors.textSecondary,
                 ),
                 onPressed: () {
                   setState(() {

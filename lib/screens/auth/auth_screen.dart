@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../theme/app_colors.dart';
 import '../login/login_screen.dart';
+import '../main_navigation.dart';
 import '../signup/signup_screen.dart';
 import '../../components/logo.dart';
 
@@ -16,6 +18,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.background,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
@@ -25,12 +28,12 @@ class _AuthScreenState extends State<AuthScreen> {
               const AppLogo(),
               const SizedBox(height: 16),
               Text(
-                _isLogin ? "Welcome Back" : "Create Account",
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                _isAnimate_welcomeText(),
+                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
               ),
               Text(
                 _isLogin ? "Sign in to your crypto wallet" : "Sign up to get started",
-                style: TextStyle(color: Colors.grey[600]),
+                style: const TextStyle(color: AppColors.textSecondary),
               ),
               const SizedBox(height: 32),
               _isLogin ? const LoginPage() : const SignupPage(),
@@ -38,28 +41,34 @@ class _AuthScreenState extends State<AuthScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xffff5f00),
+                    backgroundColor: AppColors.primary,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => const MainNavigation()),
+                      (route) => false,
+                    );
+                  },
                   child: Text(
                     _isLogin ? "Sign In" : "Sign Up",
-                    style: const TextStyle(fontSize: 18, color: Colors.white),
+                    style: const TextStyle(fontSize: 18, color: AppColors.textWhite),
                   ),
                 ),
               ),
               const SizedBox(height: 24),
               const Row(
                 children: [
-                  Expanded(child: Divider()),
+                  Expanded(child: Divider(color: AppColors.backgroundLight)),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text("OR"),
+                    child: Text("OR", style: TextStyle(color: AppColors.textSecondary)),
                   ),
-                  Expanded(child: Divider()),
+                  Expanded(child: Divider(color: AppColors.backgroundLight)),
                 ],
               ),
               const SizedBox(height: 16),
@@ -68,15 +77,15 @@ class _AuthScreenState extends State<AuthScreen> {
                   Expanded(
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xfff3f4f6),
-                        foregroundColor: Colors.black,
-                        side: const BorderSide(color: Colors.grey),
+                        backgroundColor: AppColors.backgroundLight,
+                        foregroundColor: AppColors.textPrimary,
+                        side: const BorderSide(color: AppColors.backgroundLight),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
                       onPressed: () {},
-                      icon: const Icon(Icons.g_mobiledata, color: Colors.red),
+                      icon: const Icon(Icons.g_mobiledata, color: AppColors.error),
                       label: const Text("Google"),
                     ),
                   ),
@@ -84,15 +93,15 @@ class _AuthScreenState extends State<AuthScreen> {
                   Expanded(
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xfff3f4f6),
-                        foregroundColor: Colors.black,
-                        side: const BorderSide(color: Colors.grey),
+                        backgroundColor: AppColors.backgroundLight,
+                        foregroundColor: AppColors.textPrimary,
+                        side: const BorderSide(color: AppColors.backgroundLight),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
                       onPressed: () {},
-                      icon: const Icon(Icons.apple, color: Colors.black),
+                      icon: const Icon(Icons.apple, color: AppColors.textPrimary),
                       label: const Text("Apple"),
                     ),
                   ),
@@ -104,7 +113,8 @@ class _AuthScreenState extends State<AuthScreen> {
                 children: [
                   Text(_isLogin
                       ? "Don't have an account? "
-                      : "Already have an account? "),
+                      : "Already have an account? ",
+                      style: const TextStyle(color: AppColors.textSecondary)),
                   GestureDetector(
                     onTap: () {
                       setState(() {
@@ -114,7 +124,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     child: Text(
                       _isLogin ? "Sign Up" : "Login",
                       style: const TextStyle(
-                        color: Color(0xffff5f00),
+                        color: AppColors.primary,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -126,5 +136,9 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
       ),
     );
+  }
+
+  String _isAnimate_welcomeText() {
+    return _isLogin ? "Welcome Back" : "Create Account";
   }
 }

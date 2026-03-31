@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/app_colors.dart';
 
 class AppLogo extends StatelessWidget {
   final double radius;
@@ -14,11 +15,11 @@ class AppLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: radius,
-      backgroundColor: const Color(0xffff5f00),
+      backgroundColor: AppColors.primary,
       child: Icon(
         Icons.currency_bitcoin,
         size: iconSize,
-        color: Colors.white,
+        color: AppColors.textWhite,
       ),
     );
   }

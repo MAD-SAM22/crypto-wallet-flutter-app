@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../theme/app_colors.dart';
 import '../auth/auth_screen.dart';
 
 class StageContent {
@@ -73,6 +74,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     final content = returnStageContent(stage);
 
     return Scaffold(
+      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -88,7 +90,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       MaterialPageRoute(builder: (context) => const AuthScreen()),
                     );
                   },
-                  child: Text("Skip", style: TextStyle(color: Colors.grey[700])),
+                  child: const Text("Skip", style: TextStyle(color: AppColors.textSecondary)),
                 ),
               ),
               const SizedBox(height: 40),
@@ -101,8 +103,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      Color(0xFFFF8C42),
-                      Color(0xFFFF5F00),
+                      AppColors.primaryLight,
+                      AppColors.primary,
                     ],
                   ),
                 ),
@@ -130,11 +132,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   children: [
                     TextSpan(
                       text: content.titlePart1,
-                      style: const TextStyle(color: Colors.black),
+                      style: const TextStyle(color: AppColors.textPrimary),
                     ),
                     TextSpan(
                       text: content.titlePart2,
-                      style: const TextStyle(color: Color(0xffff5f00)),
+                      style: const TextStyle(color: AppColors.primary),
                     ),
                   ],
                 ),
@@ -143,9 +145,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
               Text(
                 content.description,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
-                  color: Colors.grey[700],
+                  color: AppColors.textSecondary,
                   fontFamily: "Montserrat",
                 ),
               ),
@@ -167,8 +169,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: stage == index
-                            ? const Color(0xffff5f00)
-                            : Colors.grey[400],
+                            ? AppColors.primary
+                            : AppColors.textSecondary.withOpacity(0.4),
                       ),
                     ),
                   );
@@ -179,7 +181,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xffff5f00),
+                    backgroundColor: AppColors.primary,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -201,9 +203,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("Continue",
-                          style: TextStyle(fontSize: 18, color: Colors.white)),
+                          style: TextStyle(fontSize: 18, color: AppColors.textWhite)),
                       SizedBox(width: 8),
-                      Icon(Icons.arrow_forward, color: Colors.white),
+                      Icon(Icons.arrow_forward, color: AppColors.textWhite),
                     ],
                   ),
                 ),

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import '../../theme/app_colors.dart';
 import '../onboarding/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -35,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: AnimatedContainer(
         duration: const Duration(milliseconds: 1000),
         curve: Curves.easeInOut,
-        color: _isAnimate ? Colors.white : const Color(0xffff5f00),
+        color: _isAnimate ? AppColors.background : AppColors.primary,
         child: Center(
           child: AnimatedScale(
             duration: const Duration(milliseconds: 1000),
@@ -43,11 +44,11 @@ class _SplashScreenState extends State<SplashScreen> {
             scale: _isAnimate ? 1.0 : 2.5,
             child: CircleAvatar(
               radius: 40,
-              backgroundColor: const Color(0xffff5f00),
+              backgroundColor: AppColors.primary,
               child: const Icon(
                 Icons.currency_bitcoin,
                 size: 40,
-                color: Colors.white,
+                color: AppColors.textWhite,
               ),
             ),
           ),
