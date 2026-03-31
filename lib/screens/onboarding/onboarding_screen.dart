@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'auth.dart';
+import '../auth/auth_screen.dart';
 
 class StageContent {
   final String imagePath;
@@ -15,23 +14,23 @@ class StageContent {
     required this.description,
   });
 }
+
 StageContent returnStageContent(int stage) {
   switch (stage) {
     case 0:
       return StageContent(
-        imagePath: "assets/images/anytime_anywhere.png",
-        titlePart1: "Trade anytime  ",
-        titlePart2: "anywhere",
-        description:
-        "Access global crypto markets 24/7 from anywhere in the world with our secure mobile platform."
-      );
+          imagePath: "assets/images/anytime_anywhere.png",
+          titlePart1: "Trade anytime  ",
+          titlePart2: "anywhere",
+          description:
+              "Access global crypto markets 24/7 from anywhere in the world with our secure mobile platform.");
     case 1:
       return StageContent(
         imagePath: "assets/images/crypto_wallet.png",
         titlePart1: "Manage Your ",
         titlePart2: "Crypto Wallet",
         description:
-        "Buy, Store, Send Exchange & Earn Crypto. Track your expenses.",
+            "Buy, Store, Send Exchange & Earn Crypto. Track your expenses.",
       );
     case 2:
       return StageContent(
@@ -39,7 +38,7 @@ StageContent returnStageContent(int stage) {
         titlePart1: "Save and invest ",
         titlePart2: "at the same time",
         description:
-        "Grow your wealth with smart crypto investments while automatically saving for your future goals.",
+            "Grow your wealth with smart crypto investments while automatically saving for your future goals.",
       );
     case 3:
       return StageContent(
@@ -47,7 +46,7 @@ StageContent returnStageContent(int stage) {
         titlePart1: "Transact fast ",
         titlePart2: "and easy",
         description:
-        "Send and receive crypto instantly with low fees and lightning-fast transaction processing.",
+            "Send and receive crypto instantly with low fees and lightning-fast transaction processing.",
       );
     default:
       return StageContent(
@@ -60,11 +59,11 @@ StageContent returnStageContent(int stage) {
 }
 
 class OnboardingPage extends StatefulWidget {
+  const OnboardingPage({super.key});
+
   @override
   _OnboardingPageState createState() => _OnboardingPageState();
 }
-
-
 
 class _OnboardingPageState extends State<OnboardingPage> {
   int stage = 0;
@@ -74,30 +73,25 @@ class _OnboardingPageState extends State<OnboardingPage> {
     final content = returnStageContent(stage);
 
     return Scaffold(
-      // backgroundColor: Color(0xffff5f00),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Skip button
               Align(
                 alignment: Alignment.topRight,
                 child: TextButton(
                   onPressed: () {
-                    // Navigate to login/signup
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => AuthPage()),
+                      MaterialPageRoute(builder: (context) => const AuthScreen()),
                     );
                   },
-                  child: Text("Skip",
-                      style: TextStyle(color: Colors.grey[700])),
+                  child: Text("Skip", style: TextStyle(color: Colors.grey[700])),
                 ),
               ),
-              SizedBox(height: 40),
-
+              const SizedBox(height: 40),
               Container(
                 width: 280,
                 height: 280,
@@ -116,40 +110,36 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   child: ClipOval(
                     child: Image.asset(
                       content.imagePath,
-                      width: 180, // smaller than circle
+                      width: 180,
                       height: 180,
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 24),
-              Spacer(),
-
-              // Title
+              const SizedBox(height: 24),
+              const Spacer(),
               RichText(
                 textAlign: TextAlign.left,
-                text:  TextSpan(
-                  style: TextStyle(
+                text: TextSpan(
+                  style: const TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
                     fontFamily: "Montserrat",
                   ),
                   children: [
                     TextSpan(
-                      text:  content.titlePart1,
-                      style: TextStyle(color: Colors.black),
+                      text: content.titlePart1,
+                      style: const TextStyle(color: Colors.black),
                     ),
                     TextSpan(
-                      text:  content.titlePart2,
-                      style: TextStyle(color: Color(0xffff5f00)), // orange part
+                      text: content.titlePart2,
+                      style: const TextStyle(color: Color(0xffff5f00)),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 18),
-
-              // Subtitle
+              const SizedBox(height: 18),
               Text(
                 content.description,
                 textAlign: TextAlign.center,
@@ -159,8 +149,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   fontFamily: "Montserrat",
                 ),
               ),
-              SizedBox(height: 48),
-
+              const SizedBox(height: 48),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(4, (index) {
@@ -168,45 +157,43 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     onTap: () {
                       setState(() {
                         stage = index;
-                        print(stage);
                       });
                     },
                     child: AnimatedContainer(
-                      duration: Duration(milliseconds: 300),
-                      margin: EdgeInsets.symmetric(horizontal: 4),
+                      duration: const Duration(milliseconds: 300),
+                      margin: const EdgeInsets.symmetric(horizontal: 4),
                       width: stage == index ? 48 : 12,
                       height: 12,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        color: stage == index ? Color(0xffff5f00) : Colors.grey[400],
+                        color: stage == index
+                            ? const Color(0xffff5f00)
+                            : Colors.grey[400],
                       ),
                     ),
                   );
                 }),
               ),
-              SizedBox(height: 48),
-
-              // Continue button
+              const SizedBox(height: 48),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xffff5f00),
-                    padding: EdgeInsets.symmetric(vertical: 16),
+                    backgroundColor: const Color(0xffff5f00),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
                   onPressed: () {
-                    if(stage < 3)
+                    if (stage < 3) {
                       setState(() {
                         stage++;
-                        print(stage);
-                      });else{
-                      // Navigate to login/signup
-                      Navigator.push(
+                      });
+                    } else {
+                      Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => AuthPage()),
+                        MaterialPageRoute(builder: (context) => const AuthScreen()),
                       );
                     }
                   },
@@ -214,16 +201,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("Continue",
-                          style: TextStyle(
-                              fontSize: 18, color: Colors.white)),
+                          style: TextStyle(fontSize: 18, color: Colors.white)),
                       SizedBox(width: 8),
                       Icon(Icons.arrow_forward, color: Colors.white),
                     ],
                   ),
                 ),
               ),
-              Spacer(),
-
+              const Spacer(),
             ],
           ),
         ),

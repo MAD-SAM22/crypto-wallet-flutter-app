@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'input_field.dart';
+import '../../components/input_field.dart';
 
 class SignupPage extends StatelessWidget {
+  const SignupPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -12,7 +14,7 @@ class SignupPage extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 8),
-        InputField(
+        const InputField(
           hint: "Enter your full name",
           icon: Icons.person,
         ),
@@ -23,7 +25,7 @@ class SignupPage extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 8),
-        InputField(
+        const InputField(
           hint: "name@example.com",
           icon: Icons.email,
         ),
@@ -34,7 +36,7 @@ class SignupPage extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 8),
-        InputField(
+        const InputField(
           hint: "Enter your phone number",
           icon: Icons.phone,
         ),
@@ -45,7 +47,7 @@ class SignupPage extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 8),
-        InputField(
+        const InputField(
           hint: "Enter your password",
           icon: Icons.lock,
           isPassword: true,

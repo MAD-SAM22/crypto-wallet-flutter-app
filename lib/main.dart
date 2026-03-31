@@ -1,5 +1,5 @@
-import 'package:crypto_project/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'screens/splash/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
