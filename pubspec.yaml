@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   fl_chart: ^0.66.0
   u_credit_card: ^1.4.0
+  dio: ^5.9.2
 
 dev_dependencies:
   flutter_test:

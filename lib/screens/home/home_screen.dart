@@ -1,6 +1,7 @@
 import 'package:crypto_project/screens/home/components/category_card.dart';
 import 'package:crypto_project/screens/home/components/floating_action_card.dart';
 import 'package:crypto_project/screens/home/components/greeting_section.dart';
+import 'package:crypto_project/screens/home/components/trending_coins_section.dart';
 import 'package:flutter/material.dart';
 
 import 'components/Coins_card.dart';
@@ -20,8 +21,8 @@ class HomeScreen extends StatelessWidget {
             FloatingActionCard(),
             const SectionHeader("Categories"),
             const CategoriesSection(),
-            const SectionHeader("Recent Coins"),
-            const CoinCard(),
+            const SectionHeader("Trending Coins"),
+            const TrendingCoinsSection(),
             const SectionHeader("Top Coins"),
             const CoinCard(),
             const SizedBox(height: 100),
