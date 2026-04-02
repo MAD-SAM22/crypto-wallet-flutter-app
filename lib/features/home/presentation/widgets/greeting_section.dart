@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../settings/settings_screen.dart';
+import '../../../settings/settings_screen.dart';
 import 'portfolio_value_card.dart';
 
 class GreetingSection extends StatelessWidget {

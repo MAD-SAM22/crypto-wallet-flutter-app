@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
-import '../../components/input_field.dart';
+import '../../../../components/input_field.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class SignupPage extends StatelessWidget {
+  const SignupPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const Text(
+          "Full Name",
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+        ),
+        const SizedBox(height: 8),
+        const InputField(
+          hint: "Enter your full name",
+          icon: Icons.person,
+        ),
+        const SizedBox(height: 16),
+
         const Text(
           "Email Address",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
@@ -19,6 +30,18 @@ class LoginPage extends StatelessWidget {
           icon: Icons.email,
         ),
         const SizedBox(height: 16),
+
+        const Text(
+          "Phone Number",
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+        ),
+        const SizedBox(height: 8),
+        const InputField(
+          hint: "Enter your phone number",
+          icon: Icons.phone,
+        ),
+        const SizedBox(height: 16),
+
         const Text(
           "Password",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
@@ -29,16 +52,7 @@ class LoginPage extends StatelessWidget {
           icon: Icons.lock,
           isPassword: true,
         ),
-        const SizedBox(height: 8),
-        Align(
-          alignment: Alignment.centerRight,
-          child: TextButton(
-            onPressed: () {},
-            child: const Text("Forgot Password?",
-                style: TextStyle(color: Color(0xffff5f00))),
-          ),
-        ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 24),
       ],
     );
   }

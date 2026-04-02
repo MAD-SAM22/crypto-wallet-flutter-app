@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../theme/app_colors.dart';
-import '../login/login_screen.dart';
-import '../main_navigation.dart';
-import '../signup/signup_screen.dart';
-import '../../components/logo.dart';
+import '../../../theme/app_colors.dart';
+import 'widgets/login_screen.dart';
+import '../../main_navigation.dart';
+import 'widgets/signup_screen.dart';
+import '../../../components/logo.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});

@@ -1,9 +1,9 @@
-import 'package:crypto_project/screens/history/history_screen.dart';
-import 'package:crypto_project/screens/wallet/wallet_screen.dart';
+import 'package:crypto_project/features/history/history_screen.dart';
+import 'package:crypto_project/features/wallet/wallet_screen.dart';
 import 'package:crypto_project/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-import 'home/home_screen.dart';
+import 'home/presentation/screens/home_screen.dart';
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});
@@ -20,20 +20,22 @@ class _MainNavigationState extends State<MainNavigation> {
   void setIndex(int index) {
     setState(() => _selectedIndex = index);
   }
+
   @override
   void initState() {
     super.initState();
 
     _screens = [
-      HomeScreen(),
+      const HomeScreen(),
       const Center(child: Text('Markets Screen')),
       const Center(child: Text('Trades Screen')),
-      HistoryScreen(),
+      const HistoryScreen(),
       WalletScreen(onShowHistory: () {
         setState(() => _selectedIndex = 3);
       }),
     ];
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

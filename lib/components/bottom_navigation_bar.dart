@@ -1,5 +1,6 @@
-import 'package:crypto_project/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../features/home/presentation/screens/home_screen.dart';
 
 class bottomNavigationBar extends StatefulWidget {
   const bottomNavigationBar({super.key});

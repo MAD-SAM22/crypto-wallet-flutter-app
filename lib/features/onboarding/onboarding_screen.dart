@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
-import '../auth/auth_screen.dart';
+import '../auth/presentation/auth_screen.dart';
 
 class StageContent {
   final String imagePath;

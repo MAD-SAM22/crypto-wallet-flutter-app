@@ -1,11 +1,12 @@
-import 'package:crypto_project/components/bottom_navigation_bar.dart';
-import 'package:crypto_project/screens/home/home_screen.dart';
-import 'package:crypto_project/screens/main_navigation.dart';
-import 'package:crypto_project/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'screens/splash/splash_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'core/di/dependency_injection.dart';
+import 'features/splash/splash_screen.dart';
+import 'theme/app_colors.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await setupGetIt();
   runApp(const MyApp());
 }
 
@@ -19,11 +20,11 @@ class MyApp extends StatelessWidget {
       title: 'Crypto Wallet',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-            seedColor:  AppColors.primary,
+          seedColor: AppColors.primary,
         ),
         useMaterial3: true,
       ),
-       home:    const SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }
