@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import '../../../../components/input_field.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+
+  const LoginPage({
+    super.key,
+    required this.emailController,
+    required this.passwordController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +21,10 @@ class LoginPage extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 8),
-        const InputField(
+        InputField(
           hint: "name@example.com",
           icon: Icons.email,
+          controller: emailController,
         ),
         const SizedBox(height: 16),
         const Text(
@@ -24,10 +32,11 @@ class LoginPage extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 8),
-        const InputField(
+        InputField(
           hint: "Enter your password",
           icon: Icons.lock,
           isPassword: true,
+          controller: passwordController,
         ),
         const SizedBox(height: 8),
         Align(

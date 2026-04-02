@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../core/di/dependency_injection.dart';
 import '../../theme/app_colors.dart';
 import '../auth/presentation/auth_screen.dart';
+import '../auth/presentation/logic/auth_cubit.dart';
 
 class StageContent {
   final String imagePath;
@@ -39,16 +42,14 @@ StageContent returnStageContent(int stage) {
         titlePart1: "Save and invest ",
         titlePart2: "at the same time",
         description:
-            "Grow your wealth with smart crypto investments while automatically saving for your future goals.",
-      );
+            "Grow your wealth with smart crypto investments while automatically saving for your future goals.");
     case 3:
       return StageContent(
         imagePath: "assets/images/transact.png",
         titlePart1: "Transact fast ",
         titlePart2: "and easy",
         description:
-            "Send and receive crypto instantly with low fees and lightning-fast transaction processing.",
-      );
+            "Send and receive crypto instantly with low fees and lightning-fast transaction processing.");
     default:
       return StageContent(
         imagePath: "",
@@ -87,10 +88,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => const AuthScreen()),
+                      MaterialPageRoute(
+                        builder: (context) => BlocProvider(
+                          create: (context) => getIt<AuthCubit>(),
+                          child: const AuthScreen(),
+                        ),
+                      ),
                     );
                   },
-                  child: const Text("Skip", style: TextStyle(color: AppColors.textSecondary)),
+                  child: const Text("Skip",
+                      style: TextStyle(color: AppColors.textSecondary)),
                 ),
               ),
               const SizedBox(height: 40),
@@ -195,7 +202,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     } else {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => const AuthScreen()),
+                        MaterialPageRoute(
+                          builder: (context) => BlocProvider(
+                            create: (context) => getIt<AuthCubit>(),
+                            child: const AuthScreen(),
+                          ),
+                        ),
                       );
                     }
                   },
@@ -203,7 +215,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("Continue",
-                          style: TextStyle(fontSize: 18, color: AppColors.textWhite)),
+                          style: TextStyle(
+                              fontSize: 18, color: AppColors.textWhite)),
                       SizedBox(width: 8),
                       Icon(Icons.arrow_forward, color: AppColors.textWhite),
                     ],
