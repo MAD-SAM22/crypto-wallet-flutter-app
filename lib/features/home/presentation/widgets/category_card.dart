@@ -1,48 +1,102 @@
 import 'package:flutter/material.dart';
 
-class CategoriesSection extends StatelessWidget {
+import '../../../../core/networking/api_result.dart';
+import '../../../../core/networking/api_service.dart';
+
+class CategoriesSection extends StatefulWidget {
   const CategoriesSection({super.key});
 
   @override
+  State<CategoriesSection> createState() => _CategoriesSectionState();
+}
+
+class _CategoriesSectionState extends State<CategoriesSection> {
+  final ApiService _apiService = ApiService();
+  late Future<ApiResult<List<dynamic>>> _categoriesFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    // Use the categories endpoint for market data (counts/ids)
+    _categoriesFuture = _apiService.getCategoriesList();
+  }
+
+  Map<String, dynamic> _getStyle(String id) {
+    final styles = {
+      '0g-ecosystem': {'icon': '🌐', 'color': const Color(0xFFE3F2FD)},      // Blue
+      '4chan-themed': {'icon': '🍀', 'color': const Color(0xFFE8F5E9)},      // Green
+      '8bit-chain-ecosystem': {'icon': '👾', 'color': const Color(0xFFF3E5F5)}, // Purple
+      'aarna-vault-tokens': {'icon': '🔓', 'color': const Color(0xFFFFF3E0)},   // Orange
+      'aave-tokens': {'icon': '👻', 'color': const Color(0xFFE0F7FA)},          // Cyan
+      'abstract-ecosystem': {'icon': '✨', 'color': const Color(0xFFE8EAF6)},   // Indigo
+    };
+
+    return styles[id] ?? {'icon': '💎', 'color': const Color(0xFFF5F5F5)};
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> categories = [
-      {"name": "DeFi", "count": "234 coins", "icon": "💰", "color": const Color(0xFFE8F5E9)}, // Light Green
-      {"name": "NFT", "count": "156 coins", "icon": "🎨", "color": const Color(0xFFF3E5F5)}, // Light Purple
-      {"name": "Gaming", "count": "89 coins", "icon": "🎮", "color": const Color(0xFFE3F2FD)}, // Light Blue
-      {"name": "Metaverse", "count": "67 coins", "icon": "🌐", "color": const Color(0xFFE8EAF6)}, // Light Indigo
-      {"name": "Exchange", "count": "45 coins", "icon": "🔄", "color": const Color(0xFFFFF3E0)}, // Light Orange
-      {"name": "Gold", "count": "123 coins", "icon": "🪙", "color": const Color(0xFFFFFDE7)}, // Light Yellow
-    ];
+    return FutureBuilder<ApiResult<List<dynamic>>>(
+      future: _categoriesFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: Padding(
+            padding: EdgeInsets.all(20.0),
+            child: CircularProgressIndicator(),
+          ));
+        }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+        final result = snapshot.data;
+        if (result is Success) {
+          // Take exactly 6 as requested
+          final List data = (result?.data as List).take(6).toList();
 
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20 , vertical: 0),
-          child: GridView.builder(
-            padding: EdgeInsets.zero,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 12,
-              mainAxisSpacing: 12,
-              childAspectRatio: 0.82,
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+            child: GridView.builder(
+              padding: EdgeInsets.zero,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: 0.82,
+              ),
+              itemCount: data.length,
+              itemBuilder: (context, index) {
+                final category = data[index];
+
+                final String id = category['category_id'] ?? category['id'] ?? '';
+                final String name = category['name'] ?? 'Unknown';
+
+                final style = _getStyle(id);
+                final String count = category['coins_count'] != null
+                    ? "${category['coins_count']} coins"
+                    : "-- coins";
+
+                return _buildCategoryCard(
+                  name: name,
+                  count: count,
+                  icon: style['icon'],
+                  color: style['color'],
+                );
+              },
             ),
-            itemCount: categories.length,
-            itemBuilder: (context, index) {
-              final item = categories[index];
-              return _buildCategoryCard(item);
-            },
-          ),
-        ),
-      ],
+          );
+        }
+
+        return const SizedBox.shrink(); // Hide if error or empty
+      },
     );
   }
 
-  // Individual Card Component
-  Widget _buildCategoryCard(Map<String, dynamic> item) {
+  Widget _buildCategoryCard({
+    required String name,
+    required String count,
+    required String icon,
+    required Color color
+  }) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -55,34 +109,33 @@ class CategoriesSection extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Circular Icon Background
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: item["color"],
+              color: color,
               shape: BoxShape.circle,
             ),
             child: Text(
-              item["icon"],
+              icon,
               style: const TextStyle(fontSize: 26),
             ),
           ),
           const SizedBox(height: 12),
-          // Category Name
           Text(
-            item["name"],
+            name,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: const TextStyle(
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: FontWeight.w700,
               color: Color(0xFF1A1A1A),
             ),
           ),
           const SizedBox(height: 4),
-          // Coin Count
           Text(
-            item["count"],
+            count,
             style: TextStyle(
-              fontSize: 13,
+              fontSize: 12,
               color: Colors.blueGrey[400],
               fontWeight: FontWeight.w400,
             ),

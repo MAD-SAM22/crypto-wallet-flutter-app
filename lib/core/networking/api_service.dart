@@ -11,7 +11,7 @@ class ApiService {
   Future<ApiResult<dynamic>> getTrendingData({Map<String, dynamic>? params}) async {
     try {
       final response = await _dio.get(
-        ApiConstants.baseUrl + ApiConstants.trending,
+        ApiConstants.coingeckoBaseUrl + ApiConstants.trending,
         queryParameters: params,
       );
       return Success(response.data);
@@ -19,4 +19,17 @@ class ApiService {
       return Failure(ApiErrorHandler.handle(error));
     }
   }
+
+  Future<ApiResult<List<dynamic>>> getCategoriesList() async {
+    try {
+      final response = await _dio.get(
+        ApiConstants.coingeckoBaseUrl + ApiConstants.categories,
+      );
+      return Success(response.data as List<dynamic>);
+    } catch (error) {
+      return Failure(ApiErrorHandler.handle(error));
+    }
+  }
+
+
 }

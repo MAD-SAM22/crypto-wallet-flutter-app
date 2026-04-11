@@ -3,6 +3,8 @@ import 'package:crypto_project/core/networking/api_error_handler.dart';
 abstract class ApiResult<T> {
   const ApiResult();
 
+  get data => null;
+
   R when<R>({
     required R Function(T data) success,
     required R Function(ApiErrorHandler errorHandler) failure,

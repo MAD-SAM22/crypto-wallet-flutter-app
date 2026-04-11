@@ -16,7 +16,7 @@ class TrendingCoin {
   });
 }
 
-class TopgCoin {
+class TopCoin {
   final String id;
   final String symbol;
   final String name;
@@ -24,7 +24,7 @@ class TopgCoin {
   final double price;
   final double priceChangePercentage24h;
 
-  TopgCoin({
+  TopCoin({
     required this.id,
     required this.symbol,
     required this.name,

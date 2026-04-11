@@ -4,6 +4,7 @@ import 'package:crypto_project/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import 'home/presentation/screens/home_screen.dart';
+import 'trades/presentation/screens/trade_screen.dart';
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});
@@ -28,7 +29,7 @@ class _MainNavigationState extends State<MainNavigation> {
     _screens = [
       const HomeScreen(),
       const Center(child: Text('Markets Screen')),
-      const Center(child: Text('Trades Screen')),
+      const TradeScreen(),
       const HistoryScreen(),
       WalletScreen(onShowHistory: () {
         setState(() => _selectedIndex = 3);

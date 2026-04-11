@@ -8,7 +8,12 @@ class HomeLoading extends HomeState {}
 
 class HomeSuccess extends HomeState {
   final List<TrendingCoin> coins;
-  HomeSuccess(this.coins);
+  HomeSuccess(this.coins );
+}
+
+class CategorySuccess extends HomeState {
+  final List<TrendingCoin> categories;
+  CategorySuccess(this.categories);
 }
 
 class HomeError extends HomeState {
