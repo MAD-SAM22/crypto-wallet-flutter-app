@@ -10,14 +10,14 @@ class CoinHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isPositive = coin.priceChange24h >= 0;
+    final isPositive = coin.priceChangePercentage24h >= 0;
     
     return Row(
       children: [
         CircleAvatar(
           radius: 20,
           backgroundColor: AppColors.backgroundGrey,
-          backgroundImage: NetworkImage(coin.imageUrl),
+          backgroundImage: NetworkImage(coin.image),
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -29,7 +29,7 @@ class CoinHeader extends StatelessWidget {
                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
               Text(
-                '${coin.symbol.toUpperCase()}  #${coin.marketRank}',
+                '${coin.symbol.toUpperCase()}  #${coin.marketCapRank}',
                 style: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
               ),
             ],
@@ -39,11 +39,11 @@ class CoinHeader extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              '\$${coin.price.toStringAsFixed(2)}',
+              '\$${coin.currentPrice.toStringAsFixed(2)}',
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             Text(
-              '${isPositive ? '+' : ''}${coin.priceChange24h.toStringAsFixed(2)}%',
+              '${isPositive ? '+' : ''}${coin.priceChangePercentage24h.toStringAsFixed(2)}%',
               style: TextStyle(
                 color: isPositive ? AppColors.success : AppColors.error,
                 fontWeight: FontWeight.w500,

@@ -1,8 +1,19 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+
 import '../../../../../theme/app_colors.dart';
 
 class PriceChart extends StatefulWidget {
-  const PriceChart({super.key});
+  final List<List<double>>? chartData;
+  final bool isLoading;
+  final Function(String) onFilterChanged;
+
+  const PriceChart({
+    super.key,
+    this.chartData,
+    this.isLoading = false,
+    required this.onFilterChanged,
+  });
 
   @override
   State<PriceChart> createState() => _PriceChartState();
@@ -10,7 +21,13 @@ class PriceChart extends StatefulWidget {
 
 class _PriceChartState extends State<PriceChart> {
   String selectedFilter = '24H';
-  final List<String> filters = ['1H', '24H', '7D', '1M', '1Y'];
+  final Map<String, String> filterValues = {
+    '1H': '0.04', // ~1 hour in days
+    '24H': '1',
+    '7D': '7',
+    '1M': '30',
+    '1Y': '365',
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -23,21 +40,47 @@ class _PriceChartState extends State<PriceChart> {
             color: AppColors.backgroundGrey,
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Center(
-            child: Icon(
-              Icons.show_chart_rounded,
-              size: 80,
-              color: AppColors.primary.withOpacity(0.2),
-            ),
-          ),
+          child: widget.isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : widget.chartData == null || widget.chartData!.isEmpty
+                  ? const Center(child: Text("No chart data available"))
+                  : Padding(
+                      padding: const EdgeInsets.only(top: 20, right: 20, left: 10, bottom: 10),
+                      child: LineChart(
+                        LineChartData(
+                          gridData: const FlGridData(show: false),
+                          titlesData: const FlTitlesData(show: false),
+                          borderData: FlBorderData(show: false),
+                          lineBarsData: [
+                            LineChartBarData(
+                              spots: widget.chartData!.map((point) {
+                                return FlSpot(point[0], point[1]);
+                              }).toList(),
+                              isCurved: true,
+                              color: AppColors.primary,
+                              barWidth: 2,
+                              isStrokeCapRound: true,
+                              dotData: const FlDotData(show: false),
+                              belowBarData: BarAreaData(
+                                show: true,
+                                color: AppColors.primary.withOpacity(0.1),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
         ),
         const SizedBox(height: 12),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: filters.map((filter) {
+          children: filterValues.keys.map((filter) {
             final isSelected = selectedFilter == filter;
             return GestureDetector(
-              onTap: () => setState(() => selectedFilter = filter),
+              onTap: () {
+                setState(() => selectedFilter = filter);
+                widget.onFilterChanged(filterValues[filter]!);
+              },
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(

@@ -1,3 +1,6 @@
+import 'package:crypto_project/features/trades/data/repos/trade_repo_impl.dart';
+import 'package:crypto_project/features/trades/domain/repos/trade_repo.dart';
+import 'package:crypto_project/features/trades/presentation/logic/trade_cubit.dart';
 import 'package:get_it/get_it.dart';
 import '../networking/api_service.dart';
 import '../../features/home/data/repos/home_repo_impl.dart';
@@ -20,4 +23,8 @@ Future<void> setupGetIt() async {
   // Auth Feature
   getIt.registerLazySingleton<AuthRepo>(() => AuthRepoImpl(getIt<ApiService>()));
   getIt.registerFactory<AuthCubit>(() => AuthCubit(getIt<AuthRepo>()));
+
+  // Trades Feature
+  getIt.registerLazySingleton<TradeRepo>(() => TradeRepoImpl(getIt<ApiService>()));
+  getIt.registerFactory<TradeCubit>(() => TradeCubit(getIt<TradeRepo>()));
 }
