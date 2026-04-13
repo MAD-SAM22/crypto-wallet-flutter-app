@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../../theme/app_colors.dart';
-import '../../../data/models/trade_enums.dart';
+import '../../../../theme/app_colors.dart';
+import '../../data/models/trade_enums.dart';
 
 class OrderTypeSelector extends StatelessWidget {
   final OrderType selectedOrderType;

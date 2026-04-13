@@ -6,15 +6,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../theme/app_colors.dart';
 import '../../data/models/coin.dart';
 import '../../data/models/trade_enums.dart';
-import '../widgets/trade/coin_header.dart';
-import '../widgets/trade/price_chart.dart';
-import '../widgets/trade/buy_sell_toggle.dart';
-import '../widgets/trade/order_type_selector.dart';
-import '../widgets/trade/amount_input_section.dart';
-import '../widgets/trade/balance_section.dart';
-import '../widgets/trade/trade_summary.dart';
-import '../widgets/trade/trade_button.dart';
-import '../widgets/trade/recent_trades_list.dart';
+import '../widgets/balance_section.dart';
+import '../widgets/buy_sell_toggle.dart';
+import '../widgets/coin_header.dart';
+import '../widgets/order_type_selector.dart';
+import '../widgets/price_chart.dart';
+import '../widgets/recent_trades_list.dart';
+
+import '../widgets/amount_input_section.dart';
+
+import '../widgets/trade_button.dart';
+import '../widgets/trade_summary.dart';
 
 class TradeScreen extends StatelessWidget {
   const TradeScreen({super.key});

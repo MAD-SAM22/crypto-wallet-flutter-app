@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../../theme/app_colors.dart';
-import '../../../data/models/trade_enums.dart';
+import '../../../../theme/app_colors.dart';
+import '../../data/models/trade_enums.dart';
 
 class TradeButton extends StatelessWidget {
   final TradeType tradeType;

@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
               const CategoriesSection(),
               const SectionHeader("Trending Coins"),
               const TrendingCoinsSection(),
-              const SectionHeader("Top Coins"),
+              const SectionHeader("Favourite Coins"),
               const CoinCard(),
               const SizedBox(height: 100),
             ],

@@ -1,8 +1,9 @@
 import 'package:crypto_project/features/history/history_screen.dart';
+import 'package:crypto_project/features/markets/presentation/screens/markets_screen.dart';
 import 'package:crypto_project/features/wallet/wallet_screen.dart';
-import 'package:crypto_project/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
+import '../theme/app_colors.dart';
 import 'home/presentation/screens/home_screen.dart';
 import 'trades/presentation/screens/trade_screen.dart';
 
@@ -28,7 +29,7 @@ class _MainNavigationState extends State<MainNavigation> {
 
     _screens = [
       const HomeScreen(),
-      const Center(child: Text('Markets Screen')),
+      const MarketsScreen(),
       const TradeScreen(),
       const HistoryScreen(),
       WalletScreen(onShowHistory: () {

@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../theme/app_colors.dart';
+import '../../../../theme/app_colors.dart';
 
 class PriceChart extends StatefulWidget {
   final List<List<double>>? chartData;

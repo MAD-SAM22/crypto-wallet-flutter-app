@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../theme/app_colors.dart';
-import '../../../data/models/coin.dart';
+import '../../data/models/coin.dart';
 
 class CoinHeader extends StatelessWidget {
   final Coin coin;
